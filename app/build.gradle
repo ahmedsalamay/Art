@@ -53,6 +53,8 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
 
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation group: 'com.fatboyindustrial.gson-jodatime-serialisers', name: 'gson-jodatime-serialisers', version: '1.0.0'
+
 
     implementation 'blue.aodev:material-values:1.1.1'
 
