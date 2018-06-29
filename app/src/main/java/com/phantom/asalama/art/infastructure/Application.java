@@ -17,6 +17,13 @@ public class Application extends android.app.Application {
         super.onCreate();
         Timber.plant(new Timber.DebugTree());
 
+        ArtAppComponent artAppComponent= DaggerArtAppComponent
+                .builder()
+                .contextModule(new ContextModule(this))
+                .build();
+        mArtServices=artAppComponent.provideArtService();
+        mPicasso=artAppComponent.providePicasso();
+
     }
 
     public ArtServices getArtServices() {

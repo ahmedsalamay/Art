@@ -1,40 +1,39 @@
 package com.phantom.asalama.art.models;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProjectsPage implements Parcelable
+public class ProjectPage implements Parcelable
 {
 
-    @SerializedName("projects")
+    @SerializedName("project")
     @Expose
-    private List<Project> projects = null;
+    private Project project;
     @SerializedName("http_code")
     @Expose
     private Integer httpCode;
-    public final static Parcelable.Creator<ProjectsPage> CREATOR = new Creator<ProjectsPage>() {
+    public final static Parcelable.Creator<ProjectPage> CREATOR = new Creator<ProjectPage>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public ProjectsPage createFromParcel(Parcel in) {
-            return new ProjectsPage(in);
+        public ProjectPage createFromParcel(Parcel in) {
+            return new ProjectPage(in);
         }
 
-        public ProjectsPage[] newArray(int size) {
-            return (new ProjectsPage[size]);
+        public ProjectPage[] newArray(int size) {
+            return (new ProjectPage[size]);
         }
 
     }
             ;
 
-    protected ProjectsPage(Parcel in) {
-        in.readList(this.projects, (com.phantom.asalama.art.models.Project.class.getClassLoader()));
+    protected ProjectPage(Parcel in) {
+        this.project = ((Project) in.readValue((Project.class.getClassLoader())));
         this.httpCode = ((Integer) in.readValue((Integer.class.getClassLoader())));
     }
 
@@ -42,26 +41,26 @@ public class ProjectsPage implements Parcelable
      * No args constructor for use in serialization
      *
      */
-    public ProjectsPage() {
+    public ProjectPage() {
     }
 
     /**
      *
-     * @param projects
+     * @param project
      * @param httpCode
      */
-    public ProjectsPage(List<Project> projects, Integer httpCode) {
+    public ProjectPage(Project project, Integer httpCode) {
         super();
-        this.projects = projects;
+        this.project = project;
         this.httpCode = httpCode;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Integer getHttpCode() {
@@ -72,10 +71,8 @@ public class ProjectsPage implements Parcelable
         this.httpCode = httpCode;
     }
 
-
-
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(projects);
+        dest.writeValue(project);
         dest.writeValue(httpCode);
     }
 

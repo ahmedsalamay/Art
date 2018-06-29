@@ -9,24 +9,24 @@ import com.google.gson.annotations.SerializedName;
 public class Images implements Parcelable
 {
 
-    @SerializedName("32")
-    @Expose
-    private String _32;
     @SerializedName("50")
     @Expose
     private String _50;
-    @SerializedName("78")
+    @SerializedName("100")
     @Expose
-    private String _78;
+    private String _100;
     @SerializedName("115")
     @Expose
     private String _115;
-    @SerializedName("129")
+    @SerializedName("230")
     @Expose
-    private String _129;
+    private String _230;
     @SerializedName("138")
     @Expose
     private String _138;
+    @SerializedName("276")
+    @Expose
+    private String _276;
     public final static Parcelable.Creator<Images> CREATOR = new Creator<Images>() {
 
 
@@ -45,12 +45,12 @@ public class Images implements Parcelable
             ;
 
     protected Images(Parcel in) {
-        this._32 = ((String) in.readValue((String.class.getClassLoader())));
         this._50 = ((String) in.readValue((String.class.getClassLoader())));
-        this._78 = ((String) in.readValue((String.class.getClassLoader())));
+        this._100 = ((String) in.readValue((String.class.getClassLoader())));
         this._115 = ((String) in.readValue((String.class.getClassLoader())));
-        this._129 = ((String) in.readValue((String.class.getClassLoader())));
+        this._230 = ((String) in.readValue((String.class.getClassLoader())));
         this._138 = ((String) in.readValue((String.class.getClassLoader())));
+        this._276 = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     /**
@@ -62,29 +62,21 @@ public class Images implements Parcelable
 
     /**
      *
-     * @param _32
-     * @param _129
+     * @param _230
      * @param _138
-     * @param _78
      * @param _50
+     * @param _100
      * @param _115
+     * @param _276
      */
-    public Images(String _32, String _50, String _78, String _115, String _129, String _138) {
+    public Images(String _50, String _100, String _115, String _230, String _138, String _276) {
         super();
-        this._32 = _32;
         this._50 = _50;
-        this._78 = _78;
+        this._100 = _100;
         this._115 = _115;
-        this._129 = _129;
+        this._230 = _230;
         this._138 = _138;
-    }
-
-    public String get32() {
-        return _32;
-    }
-
-    public void set32(String _32) {
-        this._32 = _32;
+        this._276 = _276;
     }
 
     public String get50() {
@@ -95,12 +87,12 @@ public class Images implements Parcelable
         this._50 = _50;
     }
 
-    public String get78() {
-        return _78;
+    public String get100() {
+        return _100;
     }
 
-    public void set78(String _78) {
-        this._78 = _78;
+    public void set100(String _100) {
+        this._100 = _100;
     }
 
     public String get115() {
@@ -111,12 +103,12 @@ public class Images implements Parcelable
         this._115 = _115;
     }
 
-    public String get129() {
-        return _129;
+    public String get230() {
+        return _230;
     }
 
-    public void set129(String _129) {
-        this._129 = _129;
+    public void set230(String _230) {
+        this._230 = _230;
     }
 
     public String get138() {
@@ -127,13 +119,23 @@ public class Images implements Parcelable
         this._138 = _138;
     }
 
+    public String get276() {
+        return _276;
+    }
+
+    public void set276(String _276) {
+        this._276 = _276;
+    }
+
+
+
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(_32);
         dest.writeValue(_50);
-        dest.writeValue(_78);
+        dest.writeValue(_100);
         dest.writeValue(_115);
-        dest.writeValue(_129);
+        dest.writeValue(_230);
         dest.writeValue(_138);
+        dest.writeValue(_276);
     }
 
     public int describeContents() {

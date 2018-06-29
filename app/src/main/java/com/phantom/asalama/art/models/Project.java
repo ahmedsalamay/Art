@@ -1,7 +1,7 @@
+
 package com.phantom.asalama.art.models;
 
 import java.util.List;
-import java.util.Map;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -30,6 +30,9 @@ public class Project implements Parcelable
     @SerializedName("url")
     @Expose
     private String url;
+    @SerializedName("privacy")
+    @Expose
+    private String privacy;
     @SerializedName("fields")
     @Expose
     private List<String> fields = null;
@@ -39,12 +42,24 @@ public class Project implements Parcelable
     @SerializedName("mature_content")
     @Expose
     private Integer matureContent;
+    @SerializedName("mature_access")
+    @Expose
+    private String matureAccess;
     @SerializedName("owners")
     @Expose
-    private Map<String, Owners> owners;
+    private List<Owner> owners = null;
     @SerializedName("stats")
     @Expose
-    private Stats stats;
+    private ProjectStats stats;
+    @SerializedName("conceived_on")
+    @Expose
+    private Integer conceivedOn;
+    @SerializedName("features")
+    @Expose
+    private List<Feature> features = null;
+    @SerializedName("colors")
+    @Expose
+    private List<Color> colors = null;
     public final static Parcelable.Creator<Project> CREATOR = new Creator<Project>() {
 
 
@@ -69,11 +84,16 @@ public class Project implements Parcelable
         this.createdOn = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.modifiedOn = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.url = ((String) in.readValue((String.class.getClassLoader())));
+        this.privacy = ((String) in.readValue((String.class.getClassLoader())));
         in.readList(this.fields, (java.lang.String.class.getClassLoader()));
         this.covers = ((Covers) in.readValue((Covers.class.getClassLoader())));
         this.matureContent = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.owners = ((Map<String, Owners>) in.readValue((Owners.class.getClassLoader())));
-        this.stats = ((Stats) in.readValue((Stats.class.getClassLoader())));
+        this.matureAccess = ((String) in.readValue((String.class.getClassLoader())));
+        in.readList(this.owners, (com.phantom.asalama.art.models.Owner.class.getClassLoader()));
+        this.stats = ((ProjectStats) in.readValue((ProjectStats.class.getClassLoader())));
+        this.conceivedOn = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        in.readList(this.features, (com.phantom.asalama.art.models.Feature.class.getClassLoader()));
+        in.readList(this.colors, (com.phantom.asalama.art.models.Color.class.getClassLoader()));
     }
 
     /**
@@ -85,19 +105,24 @@ public class Project implements Parcelable
 
     /**
      *
-     * @param createdOn
-     * @param id
-     * @param modifiedOn
-     * @param covers
+     * @param colors
      * @param stats
-     * @param name
+     * @param privacy
      * @param publishedOn
-     * @param owners
-     * @param matureContent
      * @param url
+     * @param id
+     * @param createdOn
+     * @param modifiedOn
+     * @param conceivedOn
+     * @param covers
+     * @param name
+     * @param features
+     * @param matureContent
+     * @param owners
      * @param fields
+     * @param matureAccess
      */
-    public Project(Integer id, String name, Integer publishedOn, Integer createdOn, Integer modifiedOn, String url, List<String> fields, Covers covers, Integer matureContent,  Map<String, Owners> owners, Stats stats) {
+    public Project(Integer id, String name, Integer publishedOn, Integer createdOn, Integer modifiedOn, String url, String privacy, List<String> fields, Covers covers, Integer matureContent, String matureAccess, List<Owner> owners, ProjectStats stats, Integer conceivedOn, List<Feature> features, List<Color> colors) {
         super();
         this.id = id;
         this.name = name;
@@ -105,11 +130,16 @@ public class Project implements Parcelable
         this.createdOn = createdOn;
         this.modifiedOn = modifiedOn;
         this.url = url;
+        this.privacy = privacy;
         this.fields = fields;
         this.covers = covers;
         this.matureContent = matureContent;
+        this.matureAccess = matureAccess;
         this.owners = owners;
         this.stats = stats;
+        this.conceivedOn = conceivedOn;
+        this.features = features;
+        this.colors = colors;
     }
 
     public Integer getId() {
@@ -160,6 +190,14 @@ public class Project implements Parcelable
         this.url = url;
     }
 
+    public String getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(String privacy) {
+        this.privacy = privacy;
+    }
+
     public List<String> getFields() {
         return fields;
     }
@@ -184,22 +222,53 @@ public class Project implements Parcelable
         this.matureContent = matureContent;
     }
 
-    public  Map<String, Owners> getOwners() {
+    public String getMatureAccess() {
+        return matureAccess;
+    }
+
+    public void setMatureAccess(String matureAccess) {
+        this.matureAccess = matureAccess;
+    }
+
+    public List<Owner> getOwners() {
         return owners;
     }
 
-    public void setOwners( Map<String, Owners> owners) {
+    public void setOwners(List<Owner> owners) {
         this.owners = owners;
     }
 
-    public Stats getStats() {
+    public ProjectStats getStats() {
         return stats;
     }
 
-    public void setStats(Stats stats) {
+    public void setStats(ProjectStats stats) {
         this.stats = stats;
     }
 
+    public Integer getConceivedOn() {
+        return conceivedOn;
+    }
+
+    public void setConceivedOn(Integer conceivedOn) {
+        this.conceivedOn = conceivedOn;
+    }
+
+    public List<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(List<Feature> features) {
+        this.features = features;
+    }
+
+    public List<Color> getColors() {
+        return colors;
+    }
+
+    public void setColors(List<Color> colors) {
+        this.colors = colors;
+    }
 
 
     public void writeToParcel(Parcel dest, int flags) {
@@ -209,11 +278,16 @@ public class Project implements Parcelable
         dest.writeValue(createdOn);
         dest.writeValue(modifiedOn);
         dest.writeValue(url);
+        dest.writeValue(privacy);
         dest.writeList(fields);
         dest.writeValue(covers);
         dest.writeValue(matureContent);
-        dest.writeValue(owners);
+        dest.writeValue(matureAccess);
+        dest.writeList(owners);
         dest.writeValue(stats);
+        dest.writeValue(conceivedOn);
+        dest.writeList(features);
+        dest.writeList(colors);
     }
 
     public int describeContents() {
