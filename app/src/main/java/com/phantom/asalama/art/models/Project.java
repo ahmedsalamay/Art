@@ -50,16 +50,46 @@ public class Project implements Parcelable
     private List<Owner> owners = null;
     @SerializedName("stats")
     @Expose
-    private ProjectStats stats;
+    private Stats_ stats;
     @SerializedName("conceived_on")
     @Expose
     private Integer conceivedOn;
+    @SerializedName("canvas_width")
+    @Expose
+    private Integer canvasWidth;
+    @SerializedName("tags")
+    @Expose
+    private List<String> tags = null;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("editor_version")
+    @Expose
+    private Integer editorVersion;
+    @SerializedName("allow_comments")
+    @Expose
+    private Integer allowComments;
+    @SerializedName("modules")
+    @Expose
+    private List<Module> modules = null;
+    @SerializedName("short_url")
+    @Expose
+    private String shortUrl;
+    @SerializedName("copyright")
+    @Expose
+    private Copyright copyright;
+    @SerializedName("tools")
+    @Expose
+    private List<Tool> tools = null;
     @SerializedName("features")
     @Expose
     private List<Feature> features = null;
-    @SerializedName("colors")
+    @SerializedName("styles")
     @Expose
-    private List<Color> colors = null;
+    private Styles styles;
+    @SerializedName("creator_id")
+    @Expose
+    private Integer creatorId;
     public final static Parcelable.Creator<Project> CREATOR = new Creator<Project>() {
 
 
@@ -90,10 +120,20 @@ public class Project implements Parcelable
         this.matureContent = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.matureAccess = ((String) in.readValue((String.class.getClassLoader())));
         in.readList(this.owners, (com.phantom.asalama.art.models.Owner.class.getClassLoader()));
-        this.stats = ((ProjectStats) in.readValue((ProjectStats.class.getClassLoader())));
+        this.stats = ((Stats_) in.readValue((Stats_.class.getClassLoader())));
         this.conceivedOn = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.canvasWidth = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        in.readList(this.tags, (java.lang.String.class.getClassLoader()));
+        this.description = ((String) in.readValue((String.class.getClassLoader())));
+        this.editorVersion = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.allowComments = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        in.readList(this.modules, (com.phantom.asalama.art.models.Module.class.getClassLoader()));
+        this.shortUrl = ((String) in.readValue((String.class.getClassLoader())));
+        this.copyright = ((Copyright) in.readValue((Copyright.class.getClassLoader())));
+        in.readList(this.tools, (com.phantom.asalama.art.models.Tool.class.getClassLoader()));
         in.readList(this.features, (com.phantom.asalama.art.models.Feature.class.getClassLoader()));
-        in.readList(this.colors, (com.phantom.asalama.art.models.Color.class.getClassLoader()));
+        this.styles = ((Styles) in.readValue((Styles.class.getClassLoader())));
+        this.creatorId = ((Integer) in.readValue((Integer.class.getClassLoader())));
     }
 
     /**
@@ -105,24 +145,34 @@ public class Project implements Parcelable
 
     /**
      *
-     * @param colors
      * @param stats
-     * @param privacy
      * @param publishedOn
-     * @param url
      * @param id
-     * @param createdOn
-     * @param modifiedOn
+     * @param tools
      * @param conceivedOn
-     * @param covers
+     * @param description
      * @param name
      * @param features
-     * @param matureContent
-     * @param owners
+     * @param shortUrl
      * @param fields
+     * @param tags
+     * @param creatorId
+     * @param privacy
+     * @param styles
+     * @param copyright
+     * @param editorVersion
+     * @param url
+     * @param createdOn
+     * @param canvasWidth
+     * @param modifiedOn
+     * @param covers
+     * @param allowComments
+     * @param modules
+     * @param owners
+     * @param matureContent
      * @param matureAccess
      */
-    public Project(Integer id, String name, Integer publishedOn, Integer createdOn, Integer modifiedOn, String url, String privacy, List<String> fields, Covers covers, Integer matureContent, String matureAccess, List<Owner> owners, ProjectStats stats, Integer conceivedOn, List<Feature> features, List<Color> colors) {
+    public Project(Integer id, String name, Integer publishedOn, Integer createdOn, Integer modifiedOn, String url, String privacy, List<String> fields, Covers covers, Integer matureContent, String matureAccess, List<Owner> owners, Stats_ stats, Integer conceivedOn, Integer canvasWidth, List<String> tags, String description, Integer editorVersion, Integer allowComments, List<Module> modules, String shortUrl, Copyright copyright, List<Tool> tools, List<Feature> features, Styles styles, Integer creatorId) {
         super();
         this.id = id;
         this.name = name;
@@ -138,8 +188,18 @@ public class Project implements Parcelable
         this.owners = owners;
         this.stats = stats;
         this.conceivedOn = conceivedOn;
+        this.canvasWidth = canvasWidth;
+        this.tags = tags;
+        this.description = description;
+        this.editorVersion = editorVersion;
+        this.allowComments = allowComments;
+        this.modules = modules;
+        this.shortUrl = shortUrl;
+        this.copyright = copyright;
+        this.tools = tools;
         this.features = features;
-        this.colors = colors;
+        this.styles = styles;
+        this.creatorId = creatorId;
     }
 
     public Integer getId() {
@@ -238,11 +298,11 @@ public class Project implements Parcelable
         this.owners = owners;
     }
 
-    public ProjectStats getStats() {
+    public Stats_ getStats() {
         return stats;
     }
 
-    public void setStats(ProjectStats stats) {
+    public void setStats(Stats_ stats) {
         this.stats = stats;
     }
 
@@ -254,6 +314,78 @@ public class Project implements Parcelable
         this.conceivedOn = conceivedOn;
     }
 
+    public Integer getCanvasWidth() {
+        return canvasWidth;
+    }
+
+    public void setCanvasWidth(Integer canvasWidth) {
+        this.canvasWidth = canvasWidth;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getEditorVersion() {
+        return editorVersion;
+    }
+
+    public void setEditorVersion(Integer editorVersion) {
+        this.editorVersion = editorVersion;
+    }
+
+    public Integer getAllowComments() {
+        return allowComments;
+    }
+
+    public void setAllowComments(Integer allowComments) {
+        this.allowComments = allowComments;
+    }
+
+    public List<Module> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
+    }
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
+    }
+
+    public Copyright getCopyright() {
+        return copyright;
+    }
+
+    public void setCopyright(Copyright copyright) {
+        this.copyright = copyright;
+    }
+
+    public List<Tool> getTools() {
+        return tools;
+    }
+
+    public void setTools(List<Tool> tools) {
+        this.tools = tools;
+    }
+
     public List<Feature> getFeatures() {
         return features;
     }
@@ -262,14 +394,21 @@ public class Project implements Parcelable
         this.features = features;
     }
 
-    public List<Color> getColors() {
-        return colors;
+    public Styles getStyles() {
+        return styles;
     }
 
-    public void setColors(List<Color> colors) {
-        this.colors = colors;
+    public void setStyles(Styles styles) {
+        this.styles = styles;
     }
 
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
@@ -286,8 +425,18 @@ public class Project implements Parcelable
         dest.writeList(owners);
         dest.writeValue(stats);
         dest.writeValue(conceivedOn);
+        dest.writeValue(canvasWidth);
+        dest.writeList(tags);
+        dest.writeValue(description);
+        dest.writeValue(editorVersion);
+        dest.writeValue(allowComments);
+        dest.writeList(modules);
+        dest.writeValue(shortUrl);
+        dest.writeValue(copyright);
+        dest.writeList(tools);
         dest.writeList(features);
-        dest.writeList(colors);
+        dest.writeValue(styles);
+        dest.writeValue(creatorId);
     }
 
     public int describeContents() {
