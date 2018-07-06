@@ -1,5 +1,6 @@
 package com.phantom.asalama.art.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -54,7 +55,7 @@ public class Owner implements Parcelable
     private String displayName;
     @SerializedName("fields")
     @Expose
-    private List<String> fields = null;
+    private List<String> fields = new ArrayList<>();
     @SerializedName("has_default_image")
     @Expose
     private Integer hasDefaultImage;

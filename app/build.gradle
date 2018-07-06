@@ -19,7 +19,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField("String","BehanceApiKey",BehanceApiKey)
+        it.buildConfigField("String", "BehanceApiKey", BehanceApiKey)
     }
 }
 

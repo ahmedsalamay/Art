@@ -3,7 +3,8 @@
     package="com.phantom.asalama.art">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".infastructure.Application"
         android:allowBackup="true"
@@ -19,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".screens.detail.Details"></activity>
     </application>
 
 </manifest>

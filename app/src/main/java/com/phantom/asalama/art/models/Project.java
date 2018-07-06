@@ -1,6 +1,7 @@
 
 package com.phantom.asalama.art.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
@@ -35,7 +36,7 @@ public class Project implements Parcelable
     private String privacy;
     @SerializedName("fields")
     @Expose
-    private List<String> fields = null;
+    private List<String> fields = new ArrayList<>();
     @SerializedName("covers")
     @Expose
     private Covers covers;
@@ -47,7 +48,7 @@ public class Project implements Parcelable
     private String matureAccess;
     @SerializedName("owners")
     @Expose
-    private List<Owner> owners = null;
+    private List<Owner> owners = new ArrayList<>();
     @SerializedName("stats")
     @Expose
     private Stats_ stats;
@@ -59,7 +60,7 @@ public class Project implements Parcelable
     private Integer canvasWidth;
     @SerializedName("tags")
     @Expose
-    private List<String> tags = null;
+    private List<String> tags = new ArrayList<>();
     @SerializedName("description")
     @Expose
     private String description;
@@ -71,7 +72,7 @@ public class Project implements Parcelable
     private Integer allowComments;
     @SerializedName("modules")
     @Expose
-    private List<Module> modules = null;
+    private List<Module> modules = new ArrayList<>();
     @SerializedName("short_url")
     @Expose
     private String shortUrl;
@@ -80,10 +81,10 @@ public class Project implements Parcelable
     private Copyright copyright;
     @SerializedName("tools")
     @Expose
-    private List<Tool> tools = null;
+    private List<Tool> tools = new ArrayList<>();
     @SerializedName("features")
     @Expose
-    private List<Feature> features = null;
+    private List<Feature> features = new ArrayList<>();
     @SerializedName("styles")
     @Expose
     private Styles styles;
