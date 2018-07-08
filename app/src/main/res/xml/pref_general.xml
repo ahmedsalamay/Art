@@ -1,0 +1,35 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="-1"
+        android:entries="@array/pref_field_option_lable"
+        android:entryValues="@array/pref_field_option_value"
+        android:key="@string/field_list"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/creative_field" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/country_switch"
+        android:summary="@string/country_switch_summary"
+        android:title="@string/country_switch_title" />
+
+    <ListPreference
+        android:defaultValue="-1"
+        android:entries="@array/pref_sort_option_lable"
+        android:entryValues="@array/pref_sort_option_value"
+        android:key="@string/sort_list"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/sort_list_title" />
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+
+
+</PreferenceScreen>

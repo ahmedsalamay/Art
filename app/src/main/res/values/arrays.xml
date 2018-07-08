@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_field_option_lable">
+        <item>Architecture</item>
+        <item>Drawing</item>
+        <item>Interior Design</item>
+        <item>Graphic Design</item>
+        <item>Digital Art</item>
+        <item>Advertising</item>
+        <item>Creative Direction</item>
+        <item>Fashion</item>
+        <item>Magic</item>
+        <item>Painting</item>
+    </array>
+    <array name="pref_field_option_value">
+        <item>architecture</item>
+        <item>drawing</item>
+        <item>interior+design</item>
+        <item>graphic+design</item>
+        <item>digital+art</item>
+        <item>advertising</item>
+        <item>creative+direction</item>
+        <item>fashion</item>
+        <item>magic</item>
+        <item>painting</item>
+    </array>
+
+    <array name="pref_sort_option_lable">
+        <item>Views</item>
+        <item>Newest</item>
+    </array>
+    <array name="pref_sort_option_value">
+        <item>views</item>
+        <item>published_date</item>
+    </array>
+</resources>

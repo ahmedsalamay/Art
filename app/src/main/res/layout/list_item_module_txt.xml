@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WebView
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/module_txt"
-    android:scaleType="centerCrop"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 

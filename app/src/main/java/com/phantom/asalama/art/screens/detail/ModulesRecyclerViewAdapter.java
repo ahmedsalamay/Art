@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.infastructure.Application;
@@ -48,7 +49,7 @@ public class ModulesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             case 1:
                  view= LayoutInflater.from(parent.getContext())
                          .inflate(R.layout.list_item_module_txt,parent,false);
-                return new WebViewHolder(view);
+                return new TextViewHolder(view);
         }
         return null;
     }
@@ -74,9 +75,9 @@ public class ModulesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
             break;
             case 1:
-                WebViewHolder webViewHolder=(WebViewHolder) holder;
-                webViewHolder.ModelWebView.loadData
-                        (mModules.get(position).getText(),"text/html", null);
+                TextViewHolder TextViewHolder=(TextViewHolder) holder;
+                TextViewHolder.ModelTextView.setText(mModules.get(position).getTextPlain());
+                        
              break;
         }
     }
@@ -101,21 +102,12 @@ public class ModulesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    public class WebViewHolder extends RecyclerView.ViewHolder{
+    public class TextViewHolder extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.module_txt)WebView ModelWebView;
-        public WebViewHolder(View itemView) {
+        @BindView(R.id.module_txt)TextView ModelTextView;
+        public TextViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-            ModelWebView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                // chromium, enable hardware acceleration
-                ModelWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-            } else {
-                // older android version, disable hardware acceleration
-                ModelWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            }
-            ModelWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         }
     }
 }
