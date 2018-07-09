@@ -44,7 +44,7 @@ public final class DBUtill {
                 project.setStats(stats_);
 
                 Covers covers=new Covers();
-                covers.setOriginal(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_COVER)));
+                covers.set230(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_COVER)));
                 project.setCovers(covers);
 
                 project.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DESCRIPTION)));
@@ -66,7 +66,7 @@ public final class DBUtill {
         ContentValues values = new ContentValues();
         values.put(Contract.ArtEntry.COLUMN_NAME_ID, project.getId());
         values.put(COLUMN_NAME_NAME, project.getName());
-        values.put(COLUMN_NAME_COVER, project.getCovers().getOriginal());
+        values.put(COLUMN_NAME_COVER, project.getCovers().get230());
         values.put(COLUMN_NAME_VIEWS, project.getStats().getViews());
         values.put(COLUMN_NAME_APPRECIATIONS, project.getStats().getAppreciations());
         values.put(COLUMN_NAME_FIELDS, Utility.convertArrayToString(project.getFields()));
@@ -108,7 +108,7 @@ public final class DBUtill {
             project.setStats(stats_);
 
             Covers covers=new Covers();
-            covers.setOriginal(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_COVER)));
+            covers.set230(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_COVER)));
             project.setCovers(covers);
 
             project.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DESCRIPTION)));

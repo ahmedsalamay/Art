@@ -3,20 +3,25 @@ package com.phantom.asalama.art.screens.detail;
 import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Loader;
+import android.database.DatabaseUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.util.DbUtils;
 import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.apiServices.ArtServices;
 import com.phantom.asalama.art.infastructure.Application;
 import com.phantom.asalama.art.models.Modules;
 import com.phantom.asalama.art.models.Project;
 import com.phantom.asalama.art.models.ProjectPage;
+import com.phantom.asalama.art.utill.DBUtill;
 import com.phantom.asalama.art.utill.Utility;
 import com.squareup.picasso.Picasso;
 
@@ -83,6 +88,20 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
         mModulesRecyclerViewAdapter=new
                 ModulesRecyclerViewAdapter(this,mProject.getModules());
         mModulesRecView.setAdapter(mModulesRecyclerViewAdapter);
+
+        Button BookMark =findViewById(R.id.book_mark);
+        BookMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(DBUtill.isProjectInDatabase(mProject.getId().toString(),Details.this)){
+                    //SetRemoveDrawer
+                    DBUtill.deleteProjectFromDatabase(mProject.getId().toString(),Details.this);
+                }else {
+                    //Set Add Drawer
+                    DBUtill.addProjectToFavorite(mProject,Details.this);
+                }
+            }
+        });
 
     }
 

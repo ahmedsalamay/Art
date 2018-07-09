@@ -171,6 +171,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
+        <Button
+            android:id="@+id/book_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="16dp"
+            android:text="Book Mark"
+            app:layout_constraintStart_toStartOf="@+id/views_txt"
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v4.widget.NestedScrollView>

@@ -1,8 +1,11 @@
 package com.phantom.asalama.art.screens.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +28,7 @@ import butterknife.ButterKnife;
 public class ProjectsRecyclerViewAdapter extends RecyclerView.Adapter<ProjectsRecyclerViewAdapter.ViewHolder> {
 
    private  List<Project>mProjects;
-   private final ArtHome mParent;
+   private final AppCompatActivity mParent;
    private final View.OnClickListener mOnClickListener=new View.OnClickListener() {
        @Override
        public void onClick(View v) {
@@ -37,7 +40,7 @@ public class ProjectsRecyclerViewAdapter extends RecyclerView.Adapter<ProjectsRe
        }
    };
 
-    public ProjectsRecyclerViewAdapter(ArtHome parent,List<Project> projects){
+    public ProjectsRecyclerViewAdapter(AppCompatActivity parent, List<Project> projects){
         mParent=parent;
         mProjects=projects;
     }

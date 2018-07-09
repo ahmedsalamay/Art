@@ -16,7 +16,9 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -42,6 +44,7 @@ import com.phantom.asalama.art.apiServices.ArtServices;
 import com.phantom.asalama.art.infastructure.Application;
 import com.phantom.asalama.art.models.Project;
 import com.phantom.asalama.art.models.ProjectsPage;
+import com.phantom.asalama.art.screens.collections.Collections;
 import com.phantom.asalama.art.screens.settings.SettingsActivity;
 import com.phantom.asalama.art.utill.EndlessRecyclerViewScrollListener;
 import com.phantom.asalama.art.utill.Utility;
@@ -75,6 +78,7 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private GoogleApiClient mGoogleApiClient;
     private SharedPreferences mSharedPreferences;
+    private DrawerLayout mDrawerLayout;
     @BindView(R.id.projects_rec_view)
     RecyclerView mProjectsRecView;
 
@@ -109,6 +113,21 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
                 if (Utility.isConnectedOrConnecting(getBaseContext())) {
                     loadNextDataFromApi(page);
                 }
+            }
+        });
+
+        mDrawerLayout=findViewById(R.id.drawer_layout);
+        NavigationView navigationView=findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                if(item.getItemId()==R.id.collections){
+                    Intent intent=new Intent(ArtHome.this,Collections.class);
+                    startActivity(intent);
+                }
+                return true;
             }
         });
 

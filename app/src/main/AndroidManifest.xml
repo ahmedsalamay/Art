@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".infastructure.Application"
@@ -14,6 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:authorities="com.phantom.asalama.art.provider"
+            android:name=".contentProvider.ContentProvider"/>
         <activity android:name=".screens.home.ArtHome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +27,8 @@
         <activity android:name=".screens.detail.Details" />
         <activity
             android:name=".screens.settings.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".screens.collections.Collections"></activity>
     </application>
 
 </manifest>
