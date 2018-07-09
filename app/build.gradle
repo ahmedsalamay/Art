@@ -61,6 +61,8 @@ dependencies {
     implementation 'blue.aodev:material-values:1.1.1'
 
     implementation "com.google.android.gms:play-services-location:15.0.1"
+    implementation 'com.google.android.gms:play-services-ads:15.0.0'
+
 
 
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import com.google.android.gms.ads.MobileAds;
 import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.models.Project;
 import com.phantom.asalama.art.screens.home.ProjectsRecyclerViewAdapter;
@@ -34,6 +35,8 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
 
         setContentView(R.layout.activity_art_home);
         ButterKnife.bind(this);
+
+        MobileAds.initialize(this,"ca-app-pub-8336404465569985~5584210818");
 
         RecyclerView.LayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(this, mProjects);

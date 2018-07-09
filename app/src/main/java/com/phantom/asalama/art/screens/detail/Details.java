@@ -52,13 +52,14 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
    private ArtServices mArtServices;
    private LoaderManager loaderManager;
    private final int LOADER_PROJECT_NETWORK=0;
+   private Picasso mPicasso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
-        Picasso picasso=((Application)getApplication()).getPicasso();
+         mPicasso=((Application)getApplication()).getPicasso();
          mArtServices=((Application)getApplication()).getArtServices();
         mProject= getIntent().getParcelableExtra(PROJECT_ITEM_KEY);
         loaderManager=getLoaderManager();
@@ -68,9 +69,6 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
         }else {
             loaderManager.restartLoader(LOADER_PROJECT_NETWORK,null,this);
         }
-
-        picasso.load(mProject.getOwners().get(0).getImages().get115()).into(mArtistImg);
-        mArtistNameTxt.setText( mProject.getOwners().get(0).getDisplayName());
         mProjectNameTxtH1.setText(mProject.getName());
         mProjectNameTxtH2.setText(mProject.getName());
         mCreativeFieldsTxt.setText(
@@ -143,6 +141,10 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
             mProject=data.getProject();
             mModulesRecyclerViewAdapter.setNewData(mProject.getModules());
             mModulesRecyclerViewAdapter.notifyDataSetChanged();
+
+            mArtistNameTxt.setText( mProject.getOwners().get(0).getDisplayName());
+            mPicasso.load(mProject.getOwners().get(0).getImages().get115()).into(mArtistImg);
+
             //TODO loading indecator
         }
     }

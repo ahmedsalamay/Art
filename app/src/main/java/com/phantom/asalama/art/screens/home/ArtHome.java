@@ -28,6 +28,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -81,6 +84,9 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
     private DrawerLayout mDrawerLayout;
     @BindView(R.id.projects_rec_view)
     RecyclerView mProjectsRecView;
+    @BindView(R.id.adView)
+    AdView adView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,11 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
         setContentView(R.layout.activity_art_home);
         ButterKnife.bind(this);
         setUpSharedPrefernces();
+
+        MobileAds.initialize(this,"ca-app-pub-8336404465569985~5584210818");
+        AdRequest adRequest=new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         mArtServices = ((Application) getApplication()).getArtServices();
         mLoaderManager = getLoaderManager();
         mSharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
