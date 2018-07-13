@@ -96,7 +96,8 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
         setUpSharedPrefernces();
 
         MobileAds.initialize(this,"ca-app-pub-8336404465569985~5584210818");
-        AdRequest adRequest=new AdRequest.Builder().build();
+        AdRequest adRequest=new AdRequest.Builder()
+                .addTestDevice("7F588183171DACF11176373AA129A836").build();
         adView.loadAd(adRequest);
 
         mArtServices = ((Application) getApplication()).getArtServices();

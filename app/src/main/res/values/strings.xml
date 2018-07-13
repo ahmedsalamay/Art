@@ -81,4 +81,6 @@
     <string name="sort_list">sort_list</string>
     <string name="sort_list_title">Sort By</string>
     <string name="country_code">country_code_key</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

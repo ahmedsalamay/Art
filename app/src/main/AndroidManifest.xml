@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
-            android:authorities="com.phantom.asalama.art.provider"
-            android:name=".contentProvider.ContentProvider"/>
+            android:name=".contentProvider.ContentProvider"
+            android:authorities="com.phantom.asalama.art.provider" />
+
         <activity android:name=".screens.home.ArtHome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +29,17 @@
         <activity
             android:name=".screens.settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".screens.collections.Collections"></activity>
+        <activity android:name=".screens.collections.Collections" />
+
+        <receiver android:name=".ArtWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/art_widget_provider_info" />
+        </receiver>
     </application>
 
 </manifest>

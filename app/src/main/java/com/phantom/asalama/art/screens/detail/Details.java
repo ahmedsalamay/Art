@@ -1,9 +1,13 @@
 package com.phantom.asalama.art.screens.detail;
 
 import android.app.LoaderManager;
+import android.appwidget.AppWidgetManager;
 import android.content.AsyncTaskLoader;
+import android.content.ComponentName;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.DatabaseUtils;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.util.DbUtils;
+import com.google.gson.Gson;
+import com.phantom.asalama.art.ArtWidgetProvider;
 import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.apiServices.ArtServices;
 import com.phantom.asalama.art.infastructure.Application;
@@ -97,10 +103,24 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
                 }else {
                     //Set Add Drawer
                     DBUtill.addProjectToFavorite(mProject,Details.this);
+                    SetCurrentArtWidget();
                 }
             }
         });
 
+    }
+
+     private void SetCurrentArtWidget(){
+        Gson gson=new Gson();
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        String projectJson=gson.toJson(mProject);
+        editor.putString("ART_WIDGET_KEY",projectJson);
+        editor.apply();
+        AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(this);
+        int[]appWidgetIds=appWidgetManager.getAppWidgetIds(new ComponentName(this, ArtWidgetProvider.class));
+        ArtWidgetProvider.updateArtWidget(this,appWidgetManager,appWidgetIds,mProject);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds,R.id.cover_img_widget);
     }
 
     @Override
