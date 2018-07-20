@@ -1,6 +1,7 @@
 package com.phantom.asalama.art.screens.home;
 
 import android.Manifest;
+import android.app.ActivityOptions;
 import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -19,19 +20,23 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -52,11 +57,10 @@ import com.phantom.asalama.art.screens.settings.SettingsActivity;
 import com.phantom.asalama.art.utill.EndlessRecyclerViewScrollListener;
 import com.phantom.asalama.art.utill.Utility;
 
-import org.joda.time.Days;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,22 +86,40 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
     private GoogleApiClient mGoogleApiClient;
     private SharedPreferences mSharedPreferences;
     private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    @BindView(R.id.toolbar) Toolbar mToolBar;
     @BindView(R.id.projects_rec_view)
     RecyclerView mProjectsRecView;
     @BindView(R.id.adView)
     AdView adView;
+    @BindView(R.id.spin_kit)SpinKitView mLoadingIndicator;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_art_home);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Explode explode = new Explode();
+            explode.addTarget(R.id.projects_rec_view    );
+            explode.setDuration(300);
+            getWindow().setExitTransition(explode);
+            getWindow().setEnterTransition(explode);
+        }
+
+
         ButterKnife.bind(this);
         setUpSharedPrefernces();
+        setSupportActionBar(mToolBar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
         MobileAds.initialize(this,"ca-app-pub-8336404465569985~5584210818");
         AdRequest adRequest=new AdRequest.Builder()
-                .addTestDevice("7F588183171DACF11176373AA129A836").build();
+                .addTestDevice("7F588183171DACF11176373AA129A836")
+                .build();
         adView.loadAd(adRequest);
 
         mArtServices = ((Application) getApplication()).getArtServices();
@@ -115,11 +137,22 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
             mLoaderManager.restartLoader(PROJECT_NETWORK_LOADER, pageNumberBundle, this);
         }
 
-        RecyclerView.LayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        RecyclerView.LayoutManager staggeredGridLayoutManager;
         mProjectsRecyclerViewAdapter = new ProjectsRecyclerViewAdapter(this, mProjects);
+        if(Utility.isLandScape(this)||Utility.isLargeScreen(this)){
+            staggeredGridLayoutManager
+                    = new StaggeredGridLayoutManager(4,
+                    StaggeredGridLayoutManager.VERTICAL);
+        }else {
+           staggeredGridLayoutManager
+                    = new StaggeredGridLayoutManager(2,
+                    StaggeredGridLayoutManager.VERTICAL);
+        }
         mProjectsRecView.setLayoutManager(staggeredGridLayoutManager);
         mProjectsRecView.setAdapter(mProjectsRecyclerViewAdapter);
-        mProjectsRecView.addOnScrollListener(new EndlessRecyclerViewScrollListener((StaggeredGridLayoutManager) staggeredGridLayoutManager) {
+        mProjectsRecView.addOnScrollListener(
+                new EndlessRecyclerViewScrollListener((StaggeredGridLayoutManager)
+                staggeredGridLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 if (Utility.isConnectedOrConnecting(getBaseContext())) {
@@ -129,19 +162,51 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
         });
 
         mDrawerLayout=findViewById(R.id.drawer_layout);
-        NavigationView navigationView=findViewById(R.id.nav_view);
+        final NavigationView navigationView=findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
+                //item.setChecked(true);
+                navigationView.setCheckedItem(item.getItemId());
                 mDrawerLayout.closeDrawers();
                 if(item.getItemId()==R.id.collections){
-                    Intent intent=new Intent(ArtHome.this,Collections.class);
-                    startActivity(intent);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        Bundle bundle= ActivityOptions
+                                .makeSceneTransitionAnimation(ArtHome.this).toBundle();
+                        Intent intent=new Intent(ArtHome.this,Collections.class);
+                        startActivity(intent,bundle);
+                    }else{
+                        Intent intent=new Intent(ArtHome.this,Collections.class);
+                        startActivity(intent);
+
+                    }
+
+                }if(item.getItemId()==R.id.settings){
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        Bundle bundle= ActivityOptions
+                                .makeSceneTransitionAnimation(ArtHome.this).toBundle();
+                        Intent intent = new Intent(ArtHome.this, SettingsActivity.class);
+                        startActivity(intent,bundle);
+                    }else{
+                        Intent intent = new Intent(ArtHome.this, SettingsActivity.class);
+                        startActivity(intent);
+
+                    }
                 }
                 return true;
             }
         });
+
+
+         drawerToggle=new ActionBarDrawerToggle
+                (this,mDrawerLayout,mToolBar
+                        ,R.string.open_drawer,R.string.close_drawer);
+        mDrawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.setDrawerIndicatorEnabled(true);
+
+        createLocationRequest();
 
     }
 
@@ -151,6 +216,7 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
             mGoogleApiClient=new GoogleApiClient.Builder(this)
                     .addApi(LocationServices.API).build();
             mGoogleApiClient.connect();
+
     }
 
     @Override
@@ -169,29 +235,11 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
     @Override
     protected void onResume() {
         super.onResume();
+        drawerToggle.syncState();
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        createLocationRequest();
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.settings:
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
-
 
     private void setUpSharedPrefernces() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -213,7 +261,7 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
     @Override
     public Loader<ProjectsPage> onCreateLoader(int id, @Nullable Bundle args) {
 
-        mPageNumber = args.getInt(PAGE_NUMBER_KEY_BUNDLE);
+        mPageNumber = Objects.requireNonNull(args).getInt(PAGE_NUMBER_KEY_BUNDLE);
 
         return new AsyncTaskLoader<ProjectsPage>(this) {
 
@@ -221,7 +269,7 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
             protected void onStartLoading() {
                 //super.onStartLoading();
                 forceLoad();
-                //TODO loading indicator
+                mLoadingIndicator.setVisibility(View.VISIBLE);
             }
 
             @Nullable
@@ -239,10 +287,10 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
                 } else {
                     country=null;
                 }
-                if(mField.isEmpty()){
+                if(mField!=null&& mField.isEmpty()){
                     mField=null;
                 }
-                if(mSortBy.isEmpty()||mSortBy.equals("-1")){//"-1" means the there is no selection for sort
+                if(mSortBy!=null&& (mSortBy.isEmpty()||mSortBy.equals("-1"))){//"-1" means the there is no selection for sort
                     mSortBy=null;
                 }
 
@@ -275,7 +323,7 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
 
             mProjectsRecyclerViewAdapter.setNewData(mProjects);
             mProjectsRecyclerViewAdapter.notifyDataSetChanged();
-            //TODO loading indicator
+            mLoadingIndicator.setVisibility(View.GONE);
         }
     }
 
@@ -372,7 +420,6 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
-                return;
             }
         }
     }

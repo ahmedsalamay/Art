@@ -6,40 +6,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/colorBackground"
     >
 
-   <android.support.constraint.ConstraintLayout
+
+   <android.support.design.widget.CoordinatorLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       tools:context=".screens.home.ArtHome">
+       tools:context=".screens.home.ArtHome"
+       android:fitsSystemWindows="true"
+       >
+
+      <android.support.design.widget.AppBarLayout
+          android:id="@+id/toolbar_container"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/app_bar_height"
+          android:fitsSystemWindows="true"
+          android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+          app:layout_constraintTop_toTopOf="parent">
+
+         <android.support.design.widget.CollapsingToolbarLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             app:contentScrim="?attr/colorPrimary"
+             app:expandedTitleMarginEnd="@dimen/too_bar_title_margin_end"
+             app:expandedTitleMarginStart="@dimen/too_bar_title_margin_start"
+             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="bottom"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="@dimen/dp8_margin"
+                   android:fontFamily="serif"
+                   android:text="@string/art"
+                   android:textColor="@color/textColorPrimary"
+                   android:textSize="36sp"
+                   android:textStyle="bold"
+                   app:layout_collapseMode="parallax" />
+            </android.support.v7.widget.Toolbar>
+         </android.support.design.widget.CollapsingToolbarLayout>
+      </android.support.design.widget.AppBarLayout>
+      <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+          android:id="@+id/spin_kit"
+          style="@style/SpinKitView.Large.ChasingDots"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginBottom="@dimen/dp8_margin"
+          android:layout_marginEnd="@dimen/dp8_margin"
+          android:layout_marginStart="@dimen/dp8_margin"
+          android:layout_marginTop="@dimen/dp8_margin"
+          app:SpinKit_Color="@color/colorAccent"
+          />
 
       <android.support.v7.widget.RecyclerView
           android:id="@+id/projects_rec_view"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          tools:listitem="@layout/list_item_project"
+          android:layout_height="wrap_content"
           app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+          app:layout_constraintTop_toBottomOf="@+id/toolbar_container"
+          tools:listitem="@layout/list_item_project"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior"
           />
 
       <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
           android:id="@+id/adView"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="8dp"
           ads:adSize="SMART_BANNER"
-          ads:adUnitId="cca-app-pub-8336404465569985/9411775184"
+          ads:adUnitId="ca-app-pub-8336404465569985/9411775184"
+          ads:layout_constraintBottom_toBottomOf="parent"
           ads:layout_constraintEnd_toEndOf="parent"
           ads:layout_constraintStart_toStartOf="parent"
-          ads:layout_constraintBottom_toBottomOf="parent"
-          tools:layout_editor_absoluteY="8dp" />
-   </android.support.constraint.ConstraintLayout>
-<android.support.design.widget.NavigationView
-    android:id="@+id/nav_view"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_gravity="start"
-    app:menu="@menu/drawer_view"
-    />
+          tools:layout_editor_absoluteY="8dp"
+          android:layout_gravity="bottom"
+          />
+   </android.support.design.widget.CoordinatorLayout>
+
+   <android.support.design.widget.NavigationView
+       android:id="@+id/nav_view"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:layout_gravity="start"
+       android:fitsSystemWindows="true"
+       app:menu="@menu/drawer_view"
+       app:headerLayout="@layout/nav_header"
+       />
 
 </android.support.v4.widget.DrawerLayout>

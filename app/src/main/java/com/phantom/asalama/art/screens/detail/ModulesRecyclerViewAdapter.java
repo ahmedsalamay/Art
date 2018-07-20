@@ -1,29 +1,24 @@
 package com.phantom.asalama.art.screens.detail;
 
-import android.media.Image;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.infastructure.Application;
 import com.phantom.asalama.art.models.Module;
-import com.phantom.asalama.art.models.Project;
-import com.phantom.asalama.art.screens.home.ProjectsRecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class ModulesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -68,10 +63,18 @@ public class ModulesRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
         switch (holder.getItemViewType()){
             case 0:
-                ImagesViewHolder imagesViewHolder=(ImagesViewHolder)holder;
-                Picasso picasso=((Application)(mParent.getApplication())).getPicasso();
-                picasso.load(mModules.get(position).getSrc())
-                        .into(imagesViewHolder.ModelImg);
+                if(mModules.get(position).getSrc().endsWith(mParent.getString(R.string.jpg))||
+                        mModules.get(position).getSrc().endsWith(mParent.getString(R.string.png)))
+                {
+                    ImagesViewHolder imagesViewHolder=(ImagesViewHolder)holder;
+                    Picasso picasso=((Application)(mParent.getApplication())).getPicasso();
+                    picasso.load(mModules.get(position).getSrc())
+                            .placeholder(R.drawable.placeholder)
+                            .error(R.drawable.placeholder)
+                            .into(imagesViewHolder.ModelImg);
+                }else {
+                    Timber.e(mParent.getString(R.string.wrong_image_format));
+                }
 
             break;
             case 1:

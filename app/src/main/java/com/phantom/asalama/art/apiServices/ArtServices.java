@@ -1,7 +1,6 @@
 package com.phantom.asalama.art.apiServices;
 
 
-import com.phantom.asalama.art.models.Project;
 import com.phantom.asalama.art.models.ProjectPage;
 import com.phantom.asalama.art.models.ProjectsPage;
 import com.phantom.asalama.art.utill.BehanceUrls;

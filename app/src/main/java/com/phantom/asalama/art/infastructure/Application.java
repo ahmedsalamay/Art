@@ -1,7 +1,5 @@
 package com.phantom.asalama.art.infastructure;
 
-import android.graphics.Movie;
-
 import com.phantom.asalama.art.apiServices.ArtServices;
 import com.squareup.picasso.Picasso;
 

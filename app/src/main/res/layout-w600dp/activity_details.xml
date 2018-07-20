@@ -24,17 +24,16 @@
             />
 
 
-
         <ImageView
             android:id="@+id/artist_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp24_margin"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/dp8_margin"
-            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/artist_img"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:srcCompat="@android:drawable/ic_delete"
-            android:contentDescription="@string/artist_img" />
+            app:srcCompat="@android:drawable/ic_delete" />
 
         <TextView
             android:id="@+id/artist_name_txt"
@@ -50,61 +49,57 @@
 
         <View
             android:id="@+id/view4"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/divider_height"
             android:layout_margin="@dimen/dp16_marign"
             android:layout_marginEnd="@dimen/dp8_margin"
-            android:layout_marginStart="@dimen/dp8_margin"
             android:background="@color/divider_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-            />
+            app:layout_constraintStart_toStartOf="@+id/imageButton"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
         <TextView
             android:id="@+id/project_name_text_h2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp16_marign"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/dp8_margin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/artist_img"
+            android:fontFamily="sans-serif"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_normal"
-            android:fontFamily="sans-serif"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
 
-            />
+            app:layout_constraintTop_toBottomOf="@+id/artist_img" />
 
         <TextView
             android:id="@+id/creative_fields_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp16_marign"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/dp8_margin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/project_name_text_h2"
+            android:fontFamily="sans-serif"
             android:textColor="@color/textColorPrimary"
             android:textSize="16sp"
-            android:fontFamily="sans-serif"
-            />
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/project_name_text_h2" />
 
         <View
             android:id="@+id/divider2"
             android:layout_width="@dimen/divider_width"
             android:layout_height="@dimen/divider_height"
             android:layout_margin="@dimen/dp16_marign"
-            android:layout_marginStart="@dimen/dp8_margin"
             android:layout_marginTop="@dimen/dp8_margin"
             android:background="@color/divider_color"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/creative_fields_txt" />
 
         <ImageView
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
+            android:contentDescription="@string/likes"
             android:paddingBottom="@dimen/dp16_marign"
             android:paddingEnd="@dimen/dp16_marign"
             android:paddingLeft="@dimen/dp16_marign"
@@ -112,9 +107,8 @@
             android:paddingStart="@dimen/dp16_marign"
             android:paddingTop="@dimen/dp16_marign"
             android:src="@drawable/like"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider2"
-            android:contentDescription="@string/likes" />
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <TextView
             android:id="@+id/likes_txt"
@@ -160,57 +154,58 @@
 
         <TextView
             android:id="@+id/project_name_txt_h1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp8_margin"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="@dimen/dp8_margin"
-            android:layout_marginTop="@dimen/dp24_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view4"
+            android:layout_marginTop="8dp"
+            android:fontFamily="serif"
+            android:text="sadsadasddddddddddddddddddddddddddddddddd"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/sub_title_font_size"
-            android:fontFamily="serif"
             android:textStyle="bold"
-            />
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp8_margin"
-            android:layout_marginStart="@dimen/dp8_margin"
-            android:layout_marginTop="@dimen/dp16_marign"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             app:contentPadding="@dimen/dp16_marign"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/views_txt"
             app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/project_name_txt_h1">
+            app:layout_constraintStart_toStartOf="@+id/imageButton"
+            app:layout_constraintTop_toBottomOf="@+id/view4">
 
             <TextView
                 android:id="@+id/project_description_txt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:text="Description"
-                android:textSize="@dimen/normal_font_size"
-                android:textColor="@color/textColorPrimary"
                 android:fontFamily="sans-serif"
-                />
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/normal_font_size"
+                tools:text="Description" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/modules_rec_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp8_margin"
-            android:layout_marginEnd="@dimen/dp8_margin"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="@dimen/dp8_margin"
-            android:layout_marginTop="@dimen/dp8_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            android:layout_marginTop="8dp"
             android:nestedScrollingEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/project_name_txt_h1"
             tools:listitem="@layout/list_item_module_txt"
             android:transitionName="@string/project_img"
             />
@@ -219,14 +214,17 @@
             android:id="@+id/book_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp32_margin"
-            android:layout_marginTop="@dimen/dp24_margin"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="12dp"
             android:background="#00000000"
+            android:contentDescription="@string/bookmark"
             android:padding="@dimen/dp16_marign"
             android:src="@drawable/bookmark"
-            app:layout_constraintStart_toEndOf="@+id/views_txt"
-            app:layout_constraintTop_toBottomOf="@+id/divider2"
-            android:contentDescription="@string/bookmark" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.563"
+            app:layout_constraintStart_toEndOf="@+id/project_name_text_h2"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/spin_kit"
@@ -237,12 +235,17 @@
             android:layout_marginBottom="@dimen/dp8_margin"
             android:layout_marginEnd="@dimen/dp8_margin"
             android:layout_marginStart="@dimen/dp8_margin"
-            android:layout_marginTop="@dimen/dp8_margin"
             app:SpinKit_Color="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="324dp" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v4.widget.NestedScrollView>

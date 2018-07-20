@@ -5,16 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.google.gson.Gson;
 import com.phantom.asalama.art.contentProvider.Contract;
 import com.phantom.asalama.art.models.Covers;
 import com.phantom.asalama.art.models.Owner;
 import com.phantom.asalama.art.models.Project;
-import com.phantom.asalama.art.models.ProjectStats;
 import com.phantom.asalama.art.models.Stats_;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.phantom.asalama.art.contentProvider.Contract.ArtEntry.*;
 
@@ -26,6 +25,7 @@ public final class DBUtill {
                 .query(Contract.CONTEN_BASE_URI
                         ,null,null,
                         null,null);
+        assert cursor != null;
         if (cursor.moveToFirst()) {
             do {
                 Project project = new Project();
@@ -80,16 +80,14 @@ public final class DBUtill {
     public static Project getProjectFromDatabase(String ID,Context context) {
         Project project = null;
         Uri contentUri = Contract.CONTEN_BASE_URI;
-        String selectionClause = null;
+        String selectionClause;
         String[] selectionArgs = {""};
         selectionClause = Contract.ArtEntry.COLUMN_NAME_ID + " = ?";
 
         selectionArgs[0] = ID;
         Cursor cursor = context.getContentResolver().query(contentUri, null, selectionClause, selectionArgs, null);
-        cursor.moveToFirst();
-        if (null == cursor) {
-
-        } else if (cursor.getCount() < 1) {
+        Objects.requireNonNull(cursor).moveToFirst();
+        if (cursor.getCount() < 1) {
 
         } else {
             project = new Project();
@@ -127,15 +125,13 @@ public final class DBUtill {
     public static boolean isProjectInDatabase(String id,Context context) {
 
         Project project = getProjectFromDatabase(id,context);
-        if (project == null)
-            return false;
-        return true;
+        return project != null;
     }
 
     public static int deleteProjectFromDatabase(String ID,Context context) {
 
         Uri contentUri = Contract.CONTEN_BASE_URI;
-        String selectionClause = null;
+        String selectionClause;
         String[] selectionArgs = {""};
         selectionClause = COLUMN_NAME_ID + " = ?";
 

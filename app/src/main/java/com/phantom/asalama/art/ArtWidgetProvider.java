@@ -7,14 +7,17 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
 import com.google.gson.Gson;
 import com.phantom.asalama.art.models.Project;
 import com.phantom.asalama.art.screens.home.ArtHome;
+import com.phantom.asalama.art.utill.Utility;
 import com.squareup.picasso.Picasso;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * Implementation of App Widget functionality.
@@ -32,12 +35,23 @@ public class ArtWidgetProvider extends AppWidgetProvider {
         PendingIntent pendingIntent= PendingIntent.getActivity(context,0,intent,0);
         views.setOnClickPendingIntent(R.id.cover_img_widget,pendingIntent);
 
-        if(project!=null){
+        if(project==null||project.getName().isEmpty()){
+            views.setViewVisibility(R.id.empty_state_widget,VISIBLE);
+            views.setViewVisibility(R.id.widget_container,GONE);
+        }
+        if(project!=null&&!project.getName().isEmpty()){
 
+            views.setViewVisibility(R.id.empty_state_widget,GONE);
+            views.setViewVisibility(R.id.widget_container,VISIBLE);
             Picasso picasso=new Picasso.Builder(context).build();
             picasso.load(project.getCovers().get404())
                     .into(views,R.id.cover_img_widget,appWidgetIds);
 
+            views.setTextViewText(R.id.project_name_text_h2,project.getName());
+            views.setTextViewText(R.id.creative_fields_txt, Utility.convertArrayToString(project.getFields())
+                    .replace("__,__"," , "));
+            views   .setTextViewText(R.id.views_txt,project.getStats().getViews().toString());
+            views.setTextViewText(R.id.likes_txt,project.getStats().getAppreciations().toString());
 
         }// Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

@@ -1,7 +1,5 @@
 package com.phantom.asalama.art.utill;
 
-import android.content.res.Configuration;
-
 import com.phantom.asalama.art.BuildConfig;
 
 public class BehanceUrls {

@@ -1,10 +1,10 @@
 package com.phantom.asalama.art.screens.home;
 
-import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.infastructure.Application;
 import com.phantom.asalama.art.models.Project;
 import com.phantom.asalama.art.screens.detail.Details;
-import com.phantom.asalama.art.utill.Utility;
+import com.phantom.asalama.art.screens.settings.SettingsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,10 +34,20 @@ public class ProjectsRecyclerViewAdapter extends RecyclerView.Adapter<ProjectsRe
        public void onClick(View v) {
            Project project=(Project) v.getTag();
            Context context=v.getContext();
-           Intent intent=new Intent(context, Details.class);
-           intent.putExtra(Details.PROJECT_ITEM_KEY,project);
-           context.startActivity(intent);
-       }
+
+           if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+               Bundle bundle= ActivityOptions
+                       .makeSceneTransitionAnimation(mParent).toBundle();
+               Intent intent=new Intent(context, Details.class);
+               intent.putExtra(Details.PROJECT_ITEM_KEY,project);
+               mParent.startActivity(intent,bundle);
+
+           }else{
+               Intent intent=new Intent(context, Details.class);
+               intent.putExtra(Details.PROJECT_ITEM_KEY,project);
+               mParent.startActivity(intent);
+           }
+              }
    };
 
     public ProjectsRecyclerViewAdapter(AppCompatActivity parent, List<Project> projects){
@@ -58,13 +68,16 @@ public class ProjectsRecyclerViewAdapter extends RecyclerView.Adapter<ProjectsRe
 
         Picasso picasso=((Application)(mParent.getApplication())).getPicasso();
         picasso.load(mProjects.get(position).getCovers().get230())
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.placeholder)
                 .into(holder.Cover);
         holder.ProjectName.setText(mProjects.get(position).getName());
         holder.ArtistName.setText(mProjects.get(position).getOwners().get(0).getDisplayName());
-        holder.Views.setText(mProjects.get(position).getStats().getViews().toString());
+        /*holder.Views.setText(mProjects.get(position).getStats().getViews().toString());
         holder.Apprecations.
                 setText(mProjects.get(position).getStats().getAppreciations().toString() );
         holder.CreativeFields.setText(Utility.convertArrayToString(mProjects.get(position).getFields()).replace("__,__",""));
+       */
         holder.itemView.setTag(mProjects.get(position));
         holder.itemView.setOnClickListener(mOnClickListener);
     }
@@ -84,9 +97,9 @@ public class ProjectsRecyclerViewAdapter extends RecyclerView.Adapter<ProjectsRe
        @BindView(R.id.cover_img)  ImageView Cover;
        @BindView(R.id.project_name_txt)   TextView ProjectName;
        @BindView(R.id.artist_name_txt)  TextView ArtistName;
-       @BindView(R.id.views_txt)  TextView Views;
-       @BindView(R.id.likes_txt)  TextView Apprecations;
-       @BindView(R.id.creative_field_txt) TextView CreativeFields;
+      //@BindView(R.id.views_txt)  TextView Views;
+       //@BindView(R.id.likes_txt)  TextView Apprecations;
+       //@BindView(R.id.creative_field_txt) TextView CreativeFields;
 
         public ViewHolder(View itemView) {
             super(itemView);

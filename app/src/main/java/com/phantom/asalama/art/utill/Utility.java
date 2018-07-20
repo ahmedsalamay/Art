@@ -1,10 +1,12 @@
 package com.phantom.asalama.art.utill;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class Utility {
@@ -12,30 +14,38 @@ public final class Utility {
             ConnectivityManager cm =
                     (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+            assert cm != null;
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            boolean isConnected = activeNetwork != null &&
+            return activeNetwork != null &&
                     activeNetwork.isConnectedOrConnecting();
-            return isConnected;
         }
 
     public static String strSeparator = "__,__";
     public static String convertArrayToString(List<String> array){
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (int i = 0;i<array.size(); i++) {
-            str = str+array.get(i);
+            str.append(array.get(i));
             // Do not append comma at the end of last element
             if(i<array.size()-1){
-                str = str+strSeparator;
+                str.append(strSeparator);
             }
         }
-        return str;
+        return str.toString();
     }
+
     public static ArrayList<String> convertStringToArray(String str){
         String[] arr = str.split(strSeparator);
         ArrayList<String>retArray=new ArrayList<>();
-        for(int i=0;i<arr.length;i++){
-            retArray.add(arr[i]);
-        }
+        Collections.addAll(retArray, arr);
         return retArray;
+    }
+
+    public static boolean isLargeScreen(Context context){
+        return (context.getResources().getConfiguration().screenLayout&
+                Configuration.SCREENLAYOUT_SIZE_MASK)>=Configuration.SCREENLAYOUT_SIZE_XLARGE;
+    }
+    public static boolean isLandScape(Context context){
+        return context.getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE;
     }
 }

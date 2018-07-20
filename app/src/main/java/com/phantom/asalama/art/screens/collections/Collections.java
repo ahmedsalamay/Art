@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.ads.MobileAds;
 import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.models.Project;
@@ -25,15 +27,15 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
 
      @BindView(R.id.projects_rec_view)
      RecyclerView mProjectsRecView;
+     @BindView(R.id.spin_kit)SpinKitView mLoadingIndicator;
     private List<Project> mProjects;
-    private LoaderManager mLoaderManager;
     private static final int PROJECT_DATABASE_LOADER_  = 597;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_art_home);
+        setContentView(R.layout.activity_art_collections);
         ButterKnife.bind(this);
 
         MobileAds.initialize(this,"ca-app-pub-8336404465569985~5584210818");
@@ -43,8 +45,8 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
         mProjectsRecView.setLayoutManager(staggeredGridLayoutManager);
         mProjectsRecView.setAdapter(mProjectsRecyclerViewAdapter);
 
-        mLoaderManager=getLoaderManager();
-        Loader<List<Project>>projectsLoader=mLoaderManager.getLoader(PROJECT_DATABASE_LOADER_);
+        LoaderManager mLoaderManager = getLoaderManager();
+        Loader<List<Project>>projectsLoader= mLoaderManager.getLoader(PROJECT_DATABASE_LOADER_);
         if(projectsLoader==null){
             mLoaderManager.initLoader(PROJECT_DATABASE_LOADER_,null,this);
         }else {
@@ -60,7 +62,7 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
             protected void onStartLoading() {
                 //super.onStartLoading();
                 forceLoad();
-                //TODO Loading
+                mLoadingIndicator.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -77,7 +79,7 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
                 mProjects = data;
             mProjectsRecyclerViewAdapter.setNewData(mProjects);
             mProjectsRecyclerViewAdapter.notifyDataSetChanged();
-            //TODO loading indicator
+            mLoadingIndicator.setVisibility(View.GONE);
         }
     }
 

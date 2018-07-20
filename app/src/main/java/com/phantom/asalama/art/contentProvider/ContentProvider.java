@@ -13,6 +13,8 @@ import android.support.annotation.Nullable;
 import com.phantom.asalama.art.contentProvider.Contract;
 import com.phantom.asalama.art.contentProvider.DBHelper;
 
+import java.util.Objects;
+
 import static com.phantom.asalama.art.contentProvider.Contract.AUTHORITY;
 import static com.phantom.asalama.art.contentProvider.Contract.BASE_PATH;
 import static com.phantom.asalama.art.contentProvider.DBHelper.TABLE_ART;
@@ -54,7 +56,7 @@ public class ContentProvider extends android.content.ContentProvider {
                  throw new UnsupportedOperationException("Unknown uri: " + uri);
 
         }
-        retCursor.setNotificationUri(getContext().getContentResolver(),uri);
+        retCursor.setNotificationUri(Objects.requireNonNull(getContext()).getContentResolver(),uri);
         return retCursor;
     }
 
@@ -83,7 +85,7 @@ public class ContentProvider extends android.content.ContentProvider {
 
             }
 
-            getContext().getContentResolver().notifyChange(uri,null);
+            Objects.requireNonNull(getContext()).getContentResolver().notifyChange(uri,null);
         return retUri;
     }
 
@@ -94,7 +96,7 @@ public class ContentProvider extends android.content.ContentProvider {
         int deletedRows;
         deletedRows=db.delete(TABLE_ART,selection,selectionArgs);
 
-        getContext().getContentResolver().notifyChange(uri,null);
+        Objects.requireNonNull(getContext()).getContentResolver().notifyChange(uri,null);
 
         return deletedRows;
     }
@@ -107,7 +109,7 @@ public class ContentProvider extends android.content.ContentProvider {
         int updatedRows;
         updatedRows=db.update(TABLE_ART,values,selection,selectionArgs);
 
-        getContext().getContentResolver().notifyChange(uri,null);
+        Objects.requireNonNull(getContext()).getContentResolver().notifyChange(uri,null);
 
         return updatedRows;
     }

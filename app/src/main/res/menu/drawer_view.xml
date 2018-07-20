@@ -2,8 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/collections"
-        android:title="Collections" />
+        android:title="@string/collections"
+        android:icon="@drawable/bookmark_on"
+        />
     <item
         android:id="@+id/settings"
-        android:title="Settings" />
+        android:title="@string/settings"
+        android:icon="@drawable/preference"
+        />
 </menu>

@@ -13,10 +13,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
         <provider
             android:name=".contentProvider.ContentProvider"
-            android:authorities="com.phantom.asalama.art.provider" />
+            android:authorities="com.phantom.asalama.art.provider"
+            android:exported="false" />
 
         <activity android:name=".screens.home.ArtHome">
             <intent-filter>
@@ -25,11 +27,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screens.detail.Details" />
+        <activity android:name=".screens.detail.Details"
+            android:parentActivityName=".screens.home.ArtHome"
+            />
         <activity
             android:name=".screens.settings.SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".screens.collections.Collections" />
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".screens.home.ArtHome"
+            />
+        <activity android:name=".screens.collections.Collections"
+            android:parentActivityName=".screens.home.ArtHome"
+            android:label="@string/collections"
+            />
 
         <receiver android:name=".ArtWidgetProvider">
             <intent-filter>

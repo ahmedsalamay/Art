@@ -1,7 +1,7 @@
 package com.phantom.asalama.art.infastructure;
 
 import android.content.Context;
-import android.support.v7.app.WindowDecorActionBar;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 
@@ -29,7 +29,7 @@ public class NetworkModule {
     public  HttpLoggingInterceptor provideLoggingInterceptor(){
         return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
-            public void log(String message) {
+            public void log(@NonNull String message) {
                 Timber.i(message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BASIC);
