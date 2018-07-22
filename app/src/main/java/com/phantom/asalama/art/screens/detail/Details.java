@@ -6,6 +6,10 @@ import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
@@ -27,7 +31,7 @@ import android.widget.TextView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.gson.Gson;
-import com.phantom.asalama.art.ArtWidgetProvider;
+import com.phantom.asalama.art.widget.ArtWidgetProvider;
 import com.phantom.asalama.art.R;
 import com.phantom.asalama.art.apiServices.ArtServices;
 import com.phantom.asalama.art.infastructure.Application;
@@ -38,6 +42,7 @@ import com.phantom.asalama.art.utill.Utility;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -61,6 +66,7 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
    @BindView(R.id.toolbar)Toolbar mToolbar;
    @BindView(R.id.cardView)
     CardView mDescriptionContainerCard;
+   @BindView(R.id.likes_image)ImageView mLikesImageView;
    @BindView(R.id.spin_kit)SpinKitView mLoadingIndicator;
    private Project mProject;
    private ModulesRecyclerViewAdapter mModulesRecyclerViewAdapter;
@@ -109,8 +115,8 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
         mCreativeFieldsTxt.setText(
                 Utility.convertArrayToString(mProject.getFields())
                         .replace("__,__"," , "));
-        mViewsTxt.setText(mProject.getStats().getViews().toString());
-        mApprecaitionTxt.setText(mProject.getStats().getAppreciations().toString());
+        mViewsTxt.setText(String.format(Locale.getDefault(),mProject.getStats().getViews().toString()));
+        mApprecaitionTxt.setText(String.format(Locale.getDefault(),mProject.getStats().getAppreciations().toString()));
         if(mProject.getDescription()==null||mProject.getDescription().isEmpty()){
             mDescriptionContainerCard.setVisibility(View.INVISIBLE);
         }else{
@@ -165,6 +171,7 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
             }
         }
 
+       new LoadDrawableAsnkTask().execute();
     }
 
      private void SetCurrentArtWidget(){
@@ -249,4 +256,23 @@ public class Details extends AppCompatActivity implements LoaderManager.LoaderCa
         return super.onOptionsItemSelected(item);
     }
 
+    class LoadDrawableAsnkTask extends AsyncTask<Void,Void,Bitmap>{
+
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            Resources res=getResources();
+            int id=R.drawable.like;
+            Bitmap bitmap= BitmapFactory.decodeResource(res,id);
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            mLikesImageView.setImageBitmap(bitmap);
+        }
+    }
+
 }
+//@drawable/like

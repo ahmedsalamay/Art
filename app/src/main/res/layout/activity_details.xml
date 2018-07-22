@@ -100,21 +100,20 @@
             app:layout_constraintTop_toBottomOf="@+id/creative_fields_txt" />
 
         <ImageView
-            android:id="@+id/imageButton"
+            android:id="@+id/likes_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
+            android:contentDescription="@string/likes"
             android:paddingBottom="@dimen/dp16_marign"
             android:paddingEnd="@dimen/dp16_marign"
             android:paddingLeft="@dimen/dp16_marign"
             android:paddingRight="@dimen/dp16_marign"
             android:paddingStart="@dimen/dp16_marign"
             android:paddingTop="@dimen/dp16_marign"
-            android:src="@drawable/like"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider2"
-            android:contentDescription="@string/likes" />
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <TextView
             android:id="@+id/likes_txt"
@@ -123,7 +122,7 @@
             android:layout_marginStart="@dimen/dp24_margin"
             android:layout_marginTop="@dimen/dp44_margin_top"
             android:paddingHorizontal="@dimen/dp4_padding"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/likes_image"
             app:layout_constraintTop_toBottomOf="@+id/divider2"
             tools:text="300"
             android:textColor="@color/textColorPrimary"

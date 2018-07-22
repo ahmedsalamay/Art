@@ -55,7 +55,7 @@
             android:layout_marginEnd="@dimen/dp8_margin"
             android:background="@color/divider_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageButton"
+            app:layout_constraintStart_toStartOf="@+id/likes_image"
             app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
         <TextView
@@ -94,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@+id/creative_fields_txt" />
 
         <ImageView
-            android:id="@+id/imageButton"
+            android:id="@+id/likes_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -117,7 +117,7 @@
             android:layout_marginStart="@dimen/dp24_margin"
             android:layout_marginTop="@dimen/dp44_margin_top"
             android:paddingHorizontal="@dimen/dp4_padding"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/likes_image"
             app:layout_constraintTop_toBottomOf="@+id/divider2"
             tools:text="300"
             android:textColor="@color/textColorPrimary"
@@ -160,7 +160,6 @@
             android:layout_marginStart="@dimen/dp8_margin"
             android:layout_marginTop="8dp"
             android:fontFamily="serif"
-            android:text="sadsadasddddddddddddddddddddddddddddddddd"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/sub_title_font_size"
             android:textStyle="bold"
@@ -180,7 +179,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/views_txt"
             app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="@+id/imageButton"
+            app:layout_constraintStart_toStartOf="@+id/likes_image"
             app:layout_constraintTop_toBottomOf="@+id/view4">
 
             <TextView

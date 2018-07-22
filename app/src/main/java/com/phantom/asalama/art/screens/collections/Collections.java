@@ -30,6 +30,8 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
      @BindView(R.id.spin_kit)SpinKitView mLoadingIndicator;
     private List<Project> mProjects;
     private static final int PROJECT_DATABASE_LOADER_  = 597;
+    private int[] mScrollPosition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,21 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
             mLoaderManager.restartLoader(PROJECT_DATABASE_LOADER_,null,this);
         }
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mScrollPosition= ((StaggeredGridLayoutManager) mProjectsRecView.getLayoutManager())
+                .findFirstVisibleItemPositions(mScrollPosition);
+        outState.putIntArray(getString(R.string.first_visible_item_postion),mScrollPosition);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mScrollPosition=savedInstanceState.getIntArray(getString(R.string.first_visible_item_postion));
+        mProjectsRecView.getLayoutManager().scrollToPosition(mScrollPosition[0]);
     }
 
     @Override
@@ -80,6 +97,10 @@ public class Collections extends AppCompatActivity implements LoaderManager.Load
             mProjectsRecyclerViewAdapter.setNewData(mProjects);
             mProjectsRecyclerViewAdapter.notifyDataSetChanged();
             mLoadingIndicator.setVisibility(View.GONE);
+        }
+        if(mScrollPosition!=null&&mScrollPosition[0]!= RecyclerView.NO_POSITION )
+        {
+            mProjectsRecView.getLayoutManager().scrollToPosition(mScrollPosition[0]);
         }
     }
 

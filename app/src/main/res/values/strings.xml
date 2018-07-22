@@ -98,4 +98,5 @@
     <string name="jpg">jpg</string>
     <string name="png">png</string>
     <string name="collections">Collections</string>
+    <string name="first_visible_item_postion">rec_view_position</string>
 </resources>

@@ -93,7 +93,7 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
     @BindView(R.id.adView)
     AdView adView;
     @BindView(R.id.spin_kit)SpinKitView mLoadingIndicator;
-
+    private int[] mScrollPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,6 +241,25 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        RecyclerView.LayoutManager layoutManager= mProjectsRecView.getLayoutManager();
+        mScrollPosition=null;
+        if(layoutManager!=null)
+         mScrollPosition=   ((StaggeredGridLayoutManager)layoutManager)
+                    .findFirstVisibleItemPositions(mScrollPosition);
+        outState.putIntArray(getString(R.string.first_visible_item_postion),mScrollPosition);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mScrollPosition=savedInstanceState.getIntArray(getString(R.string.first_visible_item_postion));
+        mProjectsRecView.getLayoutManager().scrollToPosition(mScrollPosition[0]);
+    }
+
     private void setUpSharedPrefernces() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -324,6 +343,10 @@ public class ArtHome extends AppCompatActivity implements LoaderManager.LoaderCa
             mProjectsRecyclerViewAdapter.setNewData(mProjects);
             mProjectsRecyclerViewAdapter.notifyDataSetChanged();
             mLoadingIndicator.setVisibility(View.GONE);
+            if(mScrollPosition!=null&&mScrollPosition[0]!= RecyclerView.NO_POSITION )
+            {
+                mProjectsRecView.getLayoutManager().scrollToPosition(mScrollPosition[0]);
+            }
         }
     }
 

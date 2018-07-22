@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
-   >
-
+    android:background="@color/colorPrimary">
    <TextView
        android:id="@+id/empty_state_widget"
        android:layout_width="match_parent"
@@ -17,23 +15,18 @@
        android:text="@string/art"
        android:gravity="center"
        />
-
-
-
 <RelativeLayout
     android:id="@+id/widget_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     >
  <ImageView
      android:id="@+id/cover_img_widget"
-     android:layout_width="wrap_content"
+     android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:scaleType="centerCrop"
      app:srcCompat="@android:drawable/btn_star"
      android:contentDescription="@string/cover_image" />
-
  <TextView
      android:id="@+id/project_name_text_h2"
      android:layout_width="wrap_content"
@@ -41,10 +34,9 @@
      android:layout_alignParentStart="true"
      android:layout_below="@+id/cover_img_widget"
      android:fontFamily="sans-serif"
-     android:padding="@dimen/dp16_marign"
+     android:padding="@dimen/dp8_padding"
      android:textColor="@color/textColorPrimary"
      android:textSize="@dimen/sub_title_font_size" />
-
  <TextView
      android:id="@+id/creative_fields_txt"
      android:layout_width="wrap_content"
@@ -53,39 +45,34 @@
      android:layout_below="@+id/project_name_text_h2"
      android:fontFamily="sans-serif"
      android:textColor="@color/textColorPrimary"
-     android:textSize="@dimen/sub_title_font_size"
-     android:padding="@dimen/dp16_marign"
+     android:textSize="@dimen/text_size_normal"
+     android:padding="@dimen/dp8_padding"
      />
-
-
-
-
  <ImageView
-     android:id="@+id/imageButton"
+     android:id="@+id/likes_image"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_alignStart="@+id/project_name_text_h2"
      android:layout_below="@+id/creative_fields_txt"
-     android:paddingBottom="12dp"
      android:paddingEnd="12dp"
      android:paddingLeft="12dp"
      android:paddingRight="12dp"
      android:paddingStart="12dp"
-     android:paddingTop="12dp"
      android:src="@drawable/like"
      android:contentDescription="@string/likes" />
-
  <TextView
      android:id="@+id/likes_txt"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_below="@+id/creative_fields_txt"
-     android:layout_toRightOf="@+id/imageButton"
+     android:layout_toRightOf="@+id/likes_image"
      android:fontFamily="sans-serif"
-     android:padding="16dp"
-     android:paddingHorizontal="4dp"
+     android:paddingEnd="@dimen/dp8_padding"
+     android:paddingLeft="@dimen/dp8_padding"
+     android:paddingRight="@dimen/dp8_padding"
+     android:paddingStart="@dimen/dp8_padding"
      android:textColor="@color/textColorPrimary"
-     android:textSize="14sp"
+     android:textSize="@dimen/text_small"
      tools:text="300" />
 
  <ImageView
@@ -94,7 +81,10 @@
      android:layout_height="wrap_content"
      android:layout_below="@+id/creative_fields_txt"
      android:layout_toRightOf="@+id/likes_txt"
-     android:padding="12dp"
+     android:paddingEnd="@dimen/dp8_padding"
+     android:paddingLeft="@dimen/dp8_padding"
+     android:paddingRight="@dimen/dp8_padding"
+     android:paddingStart="@dimen/dp8_padding"
      android:src="@drawable/eye"
      android:contentDescription="@string/views" />
 
@@ -105,15 +95,13 @@
      android:layout_below="@+id/creative_fields_txt"
      android:layout_toRightOf="@+id/imageButton2"
      android:fontFamily="sans-serif"
-     android:padding="16dp"
-     android:paddingHorizontal="4dp"
+     android:paddingEnd="@dimen/dp8_padding"
+     android:paddingLeft="@dimen/dp8_padding"
+     android:paddingRight="@dimen/dp8_padding"
+     android:paddingStart="@dimen/dp8_padding"
      android:textColor="@color/textColorPrimary"
-     android:textSize="14sp"
+     android:textSize="@dimen/text_small"
      tools:text="15021" />
-
-
-
-
 </RelativeLayout>
 
 </FrameLayout>

@@ -40,7 +40,7 @@
             android:label="@string/collections"
             />
 
-        <receiver android:name=".ArtWidgetProvider">
+        <receiver android:name=".widget.ArtWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

@@ -27,5 +27,7 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="card_radius">8dp</dimen>
     <dimen name="image_max_height">100dp</dimen>
     <dimen name="nav_title_font_size">48sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="dp8_padding">8dp</dimen>
 
 </resources>
